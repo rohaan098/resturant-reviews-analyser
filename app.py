@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request
-from utils import get_google_reviews, extract_key_phrases
+from utils import get_google_reviews, extract_key_phrases, get_autocomplete_suggestions
+
 
 app = Flask(__name__)
 
