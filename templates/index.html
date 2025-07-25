@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Restaurant Review Keywords</title>
+</head>
+<body>
+  <h1>Restaurant Review Keyword Extractor</h1>
+  <form method="POST">
+    <input type="text" name="restaurant_name" placeholder="Enter restaurant name" required>
+    <button type="submit">Analyze</button>
+  </form>
+  {% if key_phrases %}
+    <h2>Key Phrases for "{{ restaurant }}":</h2>
+    <ul>
+      {% for phrase in key_phrases %}
+        <li>{{ phrase }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</body>
+</html>
