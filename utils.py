@@ -1,6 +1,25 @@
 import requests
 from sklearn.feature_extraction.text import TfidfVectorizer
 
+def get_autocomplete_suggestions(query, api_key=None):
+    if not api_key:
+        api_key = os.environ.get('GOOGLE_API_KEY')
+    if not api_key:
+        return []
+
+    try:
+        url = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
+        params = {
+            "input": query,
+            "types": "establishment",  # Limits to businesses
+            "key": api_key
+        }
+        response = requests.get(url, params=params).json()
+        predictions = response.get("predictions", [])
+        return [p["description"] for p in predictions]
+    except Exception as e:
+        print(f"Autocomplete error: {e}")
+        return []
 def get_google_reviews(restaurant_name, api_key):
     # 1. Find place_id for the restaurant
     search_url = 'https://maps.googleapis.com/maps/api/place/textsearch/json'
