@@ -1,23 +1,44 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Restaurant Review Analyzer</title>
+    <script>
+    async function fetchSuggestions() {
+        const input = document.getElementById('restaurant_name').value;
+        const response = await fetch(`/autocomplete?q=${input}`);
+        const suggestions = await response.json();
+
+        const list = document.getElementById('suggestions');
+        list.innerHTML = '';
+        suggestions.forEach(name => {
+            const item = document.createElement('div');
+            item.textContent = name;
+            item.onclick = () => {
+                document.getElementById('restaurant_name').value = name;
+                list.innerHTML = '';
+            };
+            list.appendChild(item);
+        });
+    }
+    </script>
+    <style>
+    #suggestions div {
+        border: 1px solid #ccc;
+        padding: 5px;
+        cursor: pointer;
+    }
+    </style>
 </head>
 <body>
-    <h1>Restaurant Review Analyzer</h1>
-    <form method="POST">
-        <input type="text" name="restaurant_name" placeholder="Enter restaurant name" required>
+    <h2>Restaurant Review Analyzer</h2>
+    <form method="POST" action="/search">
+        <input type="text" name="restaurant_name" id="restaurant_name" onkeyup="fetchSuggestions()" autocomplete="off" required>
+        <div id="suggestions"></div>
         <button type="submit">Analyze</button>
     </form>
 
-    {% if restaurant %}
-        <h2>Reviews for "{{ restaurant }}"</h2>
-        <ul>
-            {% for r in reviews %}
-                <li>{{ r }}</li>
-            {% endfor %}
-        </ul>
-        <h3>Key Phrases:</h3>
+    {% if key_phrases %}
+        <h3>Key Phrases for {{ restaurant }}:</h3>
         <ul>
             {% for phrase in key_phrases %}
                 <li>{{ phrase }}</li>
