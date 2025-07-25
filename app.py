@@ -18,4 +18,5 @@ def index():
     return render_template('index.html', key_phrases=key_phrases, restaurant=restaurant_name, reviews=reviews)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))  # Render sets PORT automatically
+    app.run(host='0.0.0.0', port=port)
