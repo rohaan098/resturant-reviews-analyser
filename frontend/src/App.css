@@ -1,0 +1,45 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+.search-box {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.2rem;
+}
+
+.suggestions {
+  background: #f1f1f1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ccc;
+}
+
+.suggestions li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestions li:hover {
+  background: #ddd;
+}
+
+.results {
+  margin-top: 2rem;
+}
+
+.phrases ul {
+  list-style: square;
+  padding-left: 20px;
+}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 4px solid #ccc;
+  margin: 10px 0;
+  padding: 10px;
+}
